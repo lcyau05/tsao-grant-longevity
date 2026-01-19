@@ -2,8 +2,17 @@ package main
 
 import (
 	"regexp"
+	"strconv"
 	"strings"
 )
+
+func atoi(s string) int {
+	v, err := strconv.Atoi(s)
+	if err != nil {
+		return 0
+	}
+	return v
+}
 
 func extractHeader(lines []string) (string, string) {
 	for i, line := range lines {
@@ -73,6 +82,20 @@ func extractCategories(text string) []string {
 	return found
 }
 
+func extractFundingCap(text string) *int {
+	re := regexp.MustCompile(`\$([\d,]+)`)
+	m := re.FindStringSubmatch(text)
+	if len(m) != 2 {
+		return nil
+	}
+	n := strings.ReplaceAll(m[1], ",", "")
+	val, err := strconv.Atoi(n)
+	if err != nil {
+		return nil
+	}
+	return &val
+}
+
 func normalizeWhenToApply(text string) WhenToApplyInfo {
 	l := strings.ToLower(text)
 
@@ -81,16 +104,51 @@ func normalizeWhenToApply(text string) WhenToApplyInfo {
 	}
 
 	switch {
-	case strings.Contains(l, "open throughout the year"):
+	case strings.Contains(l, "all year"):
 		info.ApplicationType = "open_all_year"
-	case strings.Contains(l, "before"):
-		info.ApplicationType = "deadline_based"
+
+	case strings.Contains(l, "rolling"):
+		info.ApplicationType = "rolling"
+
+	case strings.Contains(l, "month") && strings.Contains(l, "before"):
+		info.ApplicationType = "relative"
+		re := regexp.MustCompile(`(\d+)\s+month`)
+		if m := re.FindStringSubmatch(l); len(m) == 2 {
+			info.Relative = &RelativeDeadline{
+				Amount:    atoi(m[1]),
+				Unit:      "month",
+				Reference: "project_start_date",
+			}
+		}
+
+	case regexp.MustCompile(`\d{4}`).MatchString(l):
+		info.ApplicationType = "fixed_date"
 		info.DeadlineHint = text
+
 	default:
 		info.ApplicationType = "unknown"
 	}
 
 	return info
+}
+
+func inferKPIs(text string) []string {
+	l := strings.ToLower(text)
+	kpis := []string{}
+
+	if strings.Contains(l, "volunteer") {
+		kpis = append(kpis, "volunteer_engagement")
+	}
+	if strings.Contains(l, "community") {
+		kpis = append(kpis, "community_engagement")
+	}
+	if strings.Contains(l, "youth") {
+		kpis = append(kpis, "youth_outreach")
+	}
+	if strings.Contains(l, "health") {
+		kpis = append(kpis, "health_outcomes")
+	}
+	return kpis
 }
 
 func ParseGrant(raw RawGrant) *ParsedGrant {
@@ -137,9 +195,11 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 		URL:        raw.URL,
 		Agency:     agency,
 		Title:      title,
-		Status:     extractStatus(raw.RawText), // ✅ ADD THIS
+		Status:     extractStatus(raw.RawText),
 		Funding:    extractFunding(raw.RawText),
+		FundingCap: extractFundingCap(raw.RawText),
 		Categories: extractCategories(raw.RawText),
+		KPIs:       inferKPIs(raw.RawText),
 		Info: GrantInfo{
 			About:       sections["about"],
 			WhoCanApply: sections["whoCanApply"],

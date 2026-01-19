@@ -32,6 +32,8 @@ type ParsedGrant struct {
 	Title      string    `json:"title"`
 	Status     string    `json:"status"`
 	Funding    string    `json:"funding"`
+	FundingCap *int      `json:"fundingCap,omitempty"`
 	Categories []string  `json:"categories"`
+	KPIs       []string  `json:"kpis"`
 	Info       GrantInfo `json:"info"`
 }
