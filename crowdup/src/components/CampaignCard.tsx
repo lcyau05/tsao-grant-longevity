@@ -1,100 +1,101 @@
 import {
-    Badge,
-    Card,
-    createStyles,
-    Flex,
-    getStylesRef,
-    Group,
-    Image,
-    PaperProps,
-    Progress,
-    Stack,
-    Text,
-} from '@mantine/core';
-import {ICampaign} from "../types";
-import {Link} from "react-router-dom";
+  Badge,
+  Card,
+  createStyles,
+  Flex,
+  Group,
+  PaperProps,
+  Stack,
+  Text,
+} from "@mantine/core";
+import { Link } from "react-router-dom";
+import { IGrantCard } from "../types";
 
 const useStyles = createStyles((theme) => ({
-    card: {
-        position: 'relative',
-        padding: theme.spacing.lg,
-        backdropFilter: `blur(16px) saturate(180%)`,
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : `rgba(255, 255, 255, 0.75)`,
-        border: `2px solid rgba(209, 213, 219, 0.3)`,
+  card: {
+    position: "relative",
+    padding: theme.spacing.lg,
+    backgroundColor:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[7]
+        : theme.white,
+    border: `1px solid ${theme.colors.gray[3]}`,
 
-        [`&:hover .${getStylesRef('image')}`]: {
-            transform: 'scale(1.03)',
-        },
-
-        '&:hover': {
-            boxShadow: theme.shadows.xl,
-            border: `2px solid ${theme.colors.primary[7]}`,
-            backgroundColor: theme.colors.primary[0],
-            transition: 'all 150ms ease',
-        }
+    "&:hover": {
+      boxShadow: theme.shadows.md,
+      borderColor: theme.colors.primary[6],
+      transition: "all 150ms ease",
     },
+  },
 
-    title: {
-        marginTop: theme.spacing.md,
-    },
-
-    image: {
-        ref: getStylesRef('image'),
-        transition: 'transform 150ms ease',
-    }
+  title: {
+    marginTop: theme.spacing.xs,
+  },
 }));
 
 interface IProps extends PaperProps {
-    data: ICampaign
-    showActions?: boolean
+  data: IGrantCard;
 }
 
-const CampaignCard = ({data, showActions}: IProps) => {
-    const {classes} = useStyles();
-    const {
-        mainImage,
-        id,
-        title,
-        amountRaised,
-        daysLeft,
-        contributors,
-        description,
-        category,
-        country
-    } = data;
-    const linkProps = {to: `/campaigns/${id}`, rel: 'noopener noreferrer'};
+const CampaignCard = ({ data }: IProps) => {
+  const { classes } = useStyles();
 
-    return (
-        <Card radius="sm" shadow="md" ml="xs" component={Link} {...linkProps} className={classes.card}>
-            <Card.Section>
-                <Image src={mainImage} height={280} className={classes.image}/>
-            </Card.Section>
+  const {
+    title,
+    organisation,
+    description,
+    categories,
+    amount,
+    deadline,
+    link,
+  } = data;
 
-            <Card.Section pt={0} px="md" pb="md">
-                <Stack>
-                    <Text className={classes.title} lineClamp={1} fw={500} size="lg">
-                        {title}
-                    </Text>
+  return (
+    <Card
+      radius="sm"
+      component={Link}
+      to={link}
+      className={classes.card}
+    >
+      <Stack spacing="sm">
+        {/* TITLE */}
+        <Text className={classes.title} fw={600} size="lg" lineClamp={2}>
+          {title}
+        </Text>
 
-                    <Group position="apart">
-                        <Text size="xs" transform="uppercase" color="dimmed" fw={700}>{country}</Text>
-                        <Badge variant="dot" color="secondary">{category}</Badge>
-                    </Group>
+        {/* AGENCY */}
+        <Text size="sm" color="dimmed" fw={500}>
+          {organisation}
+        </Text>
 
-                    {showActions && <Text lineClamp={3} size="sm">{description}</Text>}
+        {/* CATEGORIES */}
+        <Group spacing="xs">
+          {categories.map((cat) => (
+            <Badge key={cat} variant="light">
+              {cat}
+            </Badge>
+          ))}
+        </Group>
 
-                    <Progress value={daysLeft}/>
+        {/* DESCRIPTION */}
+        <Text size="sm" lineClamp={3}>
+          {description}
+        </Text>
 
-                    <Flex justify="space-between">
-                        <Text><b>{amountRaised}</b> raised</Text>
-                        <Text><b>{contributors}</b> donations</Text>
-                    </Flex>
+        {/* FOOTER */}
+        <Flex justify="space-between" mt="sm">
+          <Text size="sm">
+            <b>Funding:</b>{" "}
+            {amount > 0 ? `$${amount.toLocaleString()}` : "Varies"}
+          </Text>
 
-                    {/*{showActions && <Button>Donate Now</Button>}*/}
-                </Stack>
-            </Card.Section>
-        </Card>
-    );
+          <Text size="sm" color="dimmed">
+            {deadline}
+          </Text>
+        </Flex>
+      </Stack>
+    </Card>
+  );
 };
 
 export default CampaignCard;

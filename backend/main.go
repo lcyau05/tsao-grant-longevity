@@ -3,32 +3,37 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 )
 
-func main() {
-	data, err := os.ReadFile("../scraper/scraped_grants.json")
+var cachedGrants []ParsedGrant
+
+func loadGrants() error {
+	data, err := os.ReadFile("parsed_grants.json")
 	if err != nil {
-		panic(err)
+		return err
+	}
+	return json.Unmarshal(data, &cachedGrants)
+}
+
+func grantsHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	json.NewEncoder(w).Encode(cachedGrants)
+}
+
+func main() {
+	// 1️⃣ Load already-parsed grants
+	if err := loadGrants(); err != nil {
+		log.Fatal("Failed to load parsed_grants.json:", err)
 	}
 
-	var rawGrants []RawGrant
-	if err := json.Unmarshal(data, &rawGrants); err != nil {
-		panic(err)
-	}
+	// 2️⃣ Register routes
+	http.HandleFunc("/grants", grantsHandler)
 
-	parsed := []ParsedGrant{}
-	for _, rg := range rawGrants {
-		grant := ParseGrant(rg)
-		if grant == nil {
-			fmt.Println("Skipped:", rg.URL)
-			continue
-		}
-		parsed = append(parsed, *grant)
-	}
-
-	out, _ := json.MarshalIndent(parsed, "", "  ")
-	os.WriteFile("parsed_grants.json", out, 0644)
-
-	fmt.Println("Parsed", len(parsed), "grants")
+	// 3️⃣ Start server
+	fmt.Println("🚀 Backend running at http://localhost:8081/grants")
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
