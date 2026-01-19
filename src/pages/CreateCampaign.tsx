@@ -22,7 +22,9 @@ import {
     TextInput,
     Title,
     TitleProps,
-    useMantineTheme
+    useMantineTheme,
+    MultiSelect,
+    Slider
 } from "@mantine/core";
 import {Link, RichTextEditor} from '@mantine/tiptap';
 import {useEditor} from '@tiptap/react';
@@ -157,10 +159,92 @@ const CreateCampaignPage = () => {
                 <Container my={36}>
                     <Title mb="xl" align="center">Create your campaign</Title>
                     <Stepper active={active} onStepClick={setActive} breakpoint="sm">
-                        <Stepper.Step
-                            label="Get started"
-                            description="Set essential fundraiser details such as fundraiser title, target and currency"
+                        {/* --- NEW STEP: NGO MATCHING PROFILE --- */}
+                        <Stepper.Step 
+                            label="NGO Profile" 
+                            description="Match suitable grants"
                         >
+                            <Title {...titleProps}>Organisation Profile</Title>
+                            
+                            <Paper {...paperProps}>
+                                <Stack spacing="xl">
+                                    <Box>
+                                        <Text size="sm" weight={500} mb="xs">Organisation size</Text>
+                                        <Radio.Group name="orgSize" required>
+                                            <Group mt="xs">
+                                                <Radio value="1-5" label="1–5 staff" />
+                                                <Radio value="6-20" label="6–20 staff" />
+                                                <Radio value="20+" label="20+ staff" />
+                                            </Group>
+                                        </Radio.Group>
+                                    </Box>
+
+                                    <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                                        <MultiSelect
+                                            label="Primary Issue Areas"
+                                            placeholder="Select areas"
+                                            data={['Elderly care', 'Dementia', 'Mental health', 'Caregivers', 'Active ageing', 'Low-income seniors']}
+                                            searchable
+                                        />
+                                        <MultiSelect
+                                            label="Beneficiary Groups"
+                                            placeholder="Select groups"
+                                            data={['Youth', 'Elderly', 'Caregivers']}
+                                            searchable
+                                        />
+                                    </SimpleGrid>
+                                </Stack>
+                            </Paper>
+
+                            <Title {...subTitleProps}>Funding & Capacity</Title>
+                            <Paper {...paperProps}>
+                                <Stack spacing="lg">
+                                    <Radio.Group label="Can you co-fund projects?" name="coFunding">
+                                        <Group mt="xs">
+                                            <Radio value="yes" label="Yes" />
+                                            <Radio value="no" label="No" />
+                                        </Group>
+                                    </Radio.Group>
+
+                                    <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                                        <NumberInput 
+                                            label="Preferred Grant Size (SGD)" 
+                                            placeholder="e.g. 50000"
+                                            min={0} 
+                                        />
+                                        <Box>
+                                            <Text size="sm" mb="xs">Grants manageable concurrently</Text>
+                                            <Slider 
+                                                min={1} 
+                                                max={5} 
+                                                step={1} 
+                                                marks={[{ value: 1, label: '1' }, { value: 5, label: '5' }]}
+                                                mb="xl"
+                                            />
+                                        </Box>
+                                    </SimpleGrid>
+
+                                    <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                                        <NumberInput label="Typical number of beneficiaries" min={1} />
+                                        <Radio.Group label="Reporting comfort level">
+                                            <Group mt="xs">
+                                                <Radio value="low" label="Low" />
+                                                <Radio value="medium" label="Medium" />
+                                                <Radio value="high" label="High" />
+                                            </Group>
+                                        </Radio.Group>
+                                    </SimpleGrid>
+                                    
+                                    <Radio.Group label="Preferred grant cycle type">
+                                        <Group mt="xs">
+                                            <Radio value="rolling" label="Rolling Basis" />
+                                            <Radio value="fixed" label="Fixed Deadline" />
+                                        </Group>
+                                    </Radio.Group>
+                                </Stack>
+                            </Paper>
+                        
+
                             <Title {...titleProps}>Campaign information</Title>
                             <Paper {...paperProps}>
                                 <SimpleGrid cols={2} breakpoints={[{maxWidth: 'sm', cols: 1}]}>
@@ -261,8 +345,16 @@ const CreateCampaignPage = () => {
                                         <TextInput label="Last name"/>
                                     </SimpleGrid>
                                     <FileDropzone
-                                        label="Upload your profile picture"
-                                        description="This picture will be shown next to your name"
+                                        label="Please attach Applicant’s Curriculum Vitae"
+                                        description="e"
+                                    />
+                                    <FileDropzone
+                                        label="Please attach Letter of Acceptance from the relevant educational institution if any."
+                                        description="e"
+                                    />
+                                    <FileDropzone
+                                        label="Please attach Details of Training Programmes (Brochure/Prospectus/Subject and Module information/etc.)"
+                                        description="e"
                                     />
                                     <Checkbox label={
                                         <>
