@@ -18,9 +18,15 @@ import {TitleBadge} from "../../components";
 const useStyles = createStyles((theme) => ({
     feature: {
         padding: theme.spacing.lg,
-        backdropFilter: `blur(16px) saturate(180%)`,
-        backgroundColor: `rgba(255, 255, 255, 0.75)`,
-        border: `1px solid rgba(209, 213, 219, 0.3)`
+        background: 'linear-gradient(135deg, rgba(227, 252, 237, 0.3) 0%, rgba(255, 255, 255, 0.7) 100%)',
+        border: `1px solid ${theme.colors.gray[2]}`,
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+        
+        '&:hover': {
+            boxShadow: theme.shadows.md,
+            borderColor: theme.colors.primary[5],
+            transform: 'translateY(-4px)',
+        }
     },
 }));
 
@@ -66,14 +72,14 @@ function Feature({image, title, description, action}: FeatureProps) {
     const {classes, cx} = useStyles();
 
     return (
-        <Card className={cx(classes.feature, 'card')} shadow="md" radius="sm">
+        <Card className={cx(classes.feature, 'card')} shadow="sm" radius="md">
             <Card.Section>
-                <Image src={image} height={240} fit="cover"/>
+                <Image src={image} height={200} fit="cover"/>
             </Card.Section>
-            <Stack spacing="sm" mt="md">
-                <Title order={4}>{title}</Title>
-                <Text size="sm">{description}</Text>
-                <Button variant="subtle" color="secondary">{action}</Button>
+            <Stack spacing="md" mt="md">
+                <Title order={4} fw={700}>{title}</Title>
+                <Text size="sm" color="dimmed">{description}</Text>
+                <Button variant="light" color="primary" size="sm" fw={600}>{action}</Button>
             </Stack>
         </Card>
     );

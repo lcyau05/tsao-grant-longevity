@@ -31,28 +31,31 @@ import {AppLinks, BrandName, SearchDrawer} from "./index";
 
 const useStyles = createStyles((theme) => ({
     header: {
-        backgroundColor: theme.colors.primary[6]
+        backgroundColor: theme.white,
+        borderBottom: `1px solid ${theme.colors.gray[2]}`,
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
     },
 
     user: {
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[0],
+        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
         padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-        borderRadius: theme.radius.sm,
-        transition: 'background-color 100ms ease',
+        borderRadius: theme.radius.md,
+        transition: 'all 200ms ease',
+        cursor: 'pointer',
 
         '&:hover': {
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.primary[7],
-            color: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+            backgroundColor: theme.colors.primary[0],
+            color: theme.colors.primary[7],
         },
 
         [theme.fn.smallerThan('sm')]: {
-            // display: 'none',
             padding: 4
         },
     },
 
     userActive: {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
+        backgroundColor: theme.colors.primary[0],
+        color: theme.colors.primary[7],
     },
 
     link: {
@@ -62,9 +65,11 @@ const useStyles = createStyles((theme) => ({
         paddingLeft: theme.spacing.md,
         paddingRight: theme.spacing.md,
         textDecoration: 'none',
-        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+        color: theme.colors.gray[7],
         fontWeight: 500,
         fontSize: theme.fontSizes.sm,
+        transition: 'all 200ms ease',
+        borderRadius: theme.radius.md,
 
         [theme.fn.smallerThan('sm')]: {
             height: rem(42),
@@ -74,7 +79,9 @@ const useStyles = createStyles((theme) => ({
         },
 
         ...theme.fn.hover({
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.primary[0],
+            backgroundColor: theme.colors.primary[0],
+            color: theme.colors.primary[7],
+            fontWeight: 600,
         }),
     },
 

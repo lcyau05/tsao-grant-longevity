@@ -47,9 +47,11 @@ const useStyles = createStyles((theme) => ({
         paddingLeft: theme.spacing.md,
         paddingRight: theme.spacing.md,
         textDecoration: 'none',
-        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+        color: theme.colors.gray[7],
         fontWeight: 500,
         fontSize: theme.fontSizes.sm,
+        transition: 'all 200ms ease',
+        borderRadius: theme.radius.md,
 
         [theme.fn.smallerThan('md')]: {
             height: rem(42),
@@ -59,12 +61,12 @@ const useStyles = createStyles((theme) => ({
         },
 
         '&:hover': {
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.primary[6],
-            color: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+            backgroundColor: theme.colors.primary[1],
+            color: theme.colors.primary[7],
             fontWeight: 600,
 
             [`& .${getStylesRef('icon')}`]: {
-                color: theme.colorScheme === 'dark' ? theme.black : theme.white,
+                color: theme.colors.primary[7],
             },
         },
     },
@@ -73,9 +75,10 @@ const useStyles = createStyles((theme) => ({
         width: '100%',
         padding: `${theme.spacing.xs} ${theme.spacing.md}`,
         borderRadius: theme.radius.md,
+        transition: 'all 200ms ease',
 
         ...theme.fn.hover({
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.primary[0],
+            backgroundColor: theme.colors.primary[0],
         }),
 
         '&:active': theme.activeStyles,

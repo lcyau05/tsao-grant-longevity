@@ -5,9 +5,14 @@ import {useMediaQuery} from "@mantine/hooks";
 const useStyles = createStyles((theme) => ({
     card: {
         position: 'relative',
-        backdropFilter: `blur(16px) saturate(180%)`,
-        backgroundColor: `rgba(255, 255, 255, 0.75)`,
-        border: `1px solid rgba(209, 213, 219, 0.3)`,
+        background: 'linear-gradient(135deg, rgba(227, 252, 237, 0.2) 0%, rgba(255, 255, 255, 0.8) 100%)',
+        border: `1px solid ${theme.colors.gray[2]}`,
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+        
+        '&:hover': {
+            boxShadow: theme.shadows.md,
+            borderColor: theme.colors.primary[5],
+        }
     },
 
     rating: {
@@ -23,9 +28,10 @@ const useStyles = createStyles((theme) => ({
     },
 
     action: {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+        backgroundColor: theme.colors.primary[0],
+        transition: 'all 200ms ease',
         ...theme.fn.hover({
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
+            backgroundColor: theme.colors.primary[1],
         }),
     },
 
@@ -52,13 +58,13 @@ const CampaignCard = ({data, ...others}: IProps) => {
                     <Image src={createdByImage} height={360} fit="cover"/>
                 </Grid.Col>}
                 <Grid.Col lg={7} pl={matchesMobile ? 'xl' : 'xl'} pb="xl">
-                    <Stack spacing="sm">
-                        <Text size="xl">"{testimonial}"</Text>
-                        <Text fw={700}>{createdBy}</Text>
-                        <Group>
-                            <Text size="md" fs="italic">{jobPosition}</Text>
+                    <Stack spacing="md">
+                        <Text size="xl" fw={500} fs="italic">"{testimonial}"</Text>
+                        <Text fw={700} size="lg">{createdBy}</Text>
+                        <Group spacing="sm">
+                            <Text size="sm" color="dimmed" fw={500}>{jobPosition}</Text>
                             <Divider orientation="vertical"/>
-                            <Text size="md" td="underline">{company}</Text>
+                            <Text size="sm" color="primary" fw={600}>{company}</Text>
                         </Group>
                     </Stack>
                 </Grid.Col>

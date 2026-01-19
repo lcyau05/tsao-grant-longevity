@@ -18,17 +18,18 @@ const HomePage = (): JSX.Element => {
     }
 
     const titleProps: TitleProps = {
-        size: 32,
+        size: 44,
         weight: 800,
         mb: "lg",
         transform: 'capitalize',
-        sx: {lineHeight: '40px'}
+        sx: {lineHeight: '52px', letterSpacing: '-0.5px'}
     }
 
     const subTitleProps: TextProps = {
         size: 20,
-        weight: 700,
+        weight: 500,
         mb: "md",
+        color: "dimmed",
         sx: {lineHeight: '28px'}
     }
 
@@ -42,7 +43,7 @@ const HomePage = (): JSX.Element => {
                 <Container>
                     <Box {...boxProps}>
                         <TitleBadge title="About us"/>
-                        <Title {...titleProps}>more people more impact</Title>
+                        <Title {...titleProps}>More People, More Impact</Title>
                         <Text {...subTitleProps}>Because together, we can make a real difference. Our volunteers service
                             in a
                             variety of roles according to their skills and interests.</Text>

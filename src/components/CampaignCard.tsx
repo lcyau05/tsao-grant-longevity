@@ -1,5 +1,6 @@
 import {
     Badge,
+    Box,
     Card,
     createStyles,
     Flex,
@@ -17,30 +18,71 @@ import {Link} from "react-router-dom";
 const useStyles = createStyles((theme) => ({
     card: {
         position: 'relative',
-        padding: theme.spacing.lg,
-        backdropFilter: `blur(16px) saturate(180%)`,
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : `rgba(255, 255, 255, 0.75)`,
-        border: `2px solid rgba(209, 213, 219, 0.3)`,
+        padding: 0,
+        overflow: 'hidden',
+        transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+        border: `1px solid ${theme.colors.gray[2]}`,
+        cursor: 'pointer',
 
         [`&:hover .${getStylesRef('image')}`]: {
-            transform: 'scale(1.03)',
+            transform: 'scale(1.05)',
         },
 
         '&:hover': {
-            boxShadow: theme.shadows.xl,
-            border: `2px solid ${theme.colors.primary[7]}`,
-            backgroundColor: theme.colors.primary[0],
-            transition: 'all 150ms ease',
+            boxShadow: theme.shadows.lg,
+            borderColor: theme.colors.primary[5],
+            transform: 'translateY(-4px)',
         }
     },
 
+    imageWrapper: {
+        position: 'relative',
+        overflow: 'hidden',
+        height: 240,
+    },
+
     title: {
-        marginTop: theme.spacing.md,
+        marginTop: theme.spacing.sm,
+        fontWeight: 700,
+        fontSize: 16,
     },
 
     image: {
         ref: getStylesRef('image'),
-        transition: 'transform 150ms ease',
+        transition: 'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+    },
+
+    content: {
+        padding: theme.spacing.lg,
+    },
+
+    badge: {
+        fontWeight: 600,
+        fontSize: 11,
+    },
+
+    meta: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: theme.spacing.md,
+        paddingTop: theme.spacing.md,
+        borderTop: `1px solid ${theme.colors.gray[2]}`,
+    },
+
+    stat: {
+        textAlign: 'center',
+        fontSize: 12,
+        
+        '& b': {
+            display: 'block',
+            fontSize: 18,
+            fontWeight: 700,
+            color: theme.colors.primary[6],
+        }
     }
 }));
 
@@ -65,34 +107,39 @@ const CampaignCard = ({data, showActions}: IProps) => {
     const linkProps = {to: `/campaigns/${id}`, rel: 'noopener noreferrer'};
 
     return (
-        <Card radius="sm" shadow="md" ml="xs" component={Link} {...linkProps} className={classes.card}>
-            <Card.Section>
-                <Image src={mainImage} height={280} className={classes.image}/>
+        <Card radius="md" shadow="sm" className={classes.card} component={Link} {...linkProps}>
+            <Card.Section className={classes.imageWrapper}>
+                <Image src={mainImage} className={classes.image}/>
             </Card.Section>
 
-            <Card.Section pt={0} px="md" pb="md">
-                <Stack>
-                    <Text className={classes.title} lineClamp={1} fw={500} size="lg">
-                        {title}
-                    </Text>
+            <Stack p={0} className={classes.content}>
+                <Text className={classes.title} lineClamp={2} fw={700} size="md">
+                    {title}
+                </Text>
 
-                    <Group position="apart">
-                        <Text size="xs" transform="uppercase" color="dimmed" fw={700}>{country}</Text>
-                        <Badge variant="dot" color="secondary">{category}</Badge>
-                    </Group>
+                <Group position="apart" spacing="xs">
+                    <Text size="xs" transform="uppercase" color="dimmed" fw={700}>{country}</Text>
+                    <Badge size="xs" variant="light" color="secondary" className={classes.badge}>{category}</Badge>
+                </Group>
 
-                    {showActions && <Text lineClamp={3} size="sm">{description}</Text>}
+                {showActions && <Text lineClamp={2} size="sm" color="dimmed">{description}</Text>}
 
-                    <Progress value={daysLeft}/>
+                <Box mt="sm">
+                    <Progress value={daysLeft} radius="sm" size="md" color="primary"/>
+                    <Text size="xs" color="dimmed" mt="xs">{daysLeft} days left</Text>
+                </Box>
 
-                    <Flex justify="space-between">
-                        <Text><b>{amountRaised}</b> raised</Text>
-                        <Text><b>{contributors}</b> donations</Text>
+                <Flex justify="space-between" className={classes.meta}>
+                    <Flex direction="column" align="center" className={classes.stat}>
+                        <Text size="xs" color="dimmed">Raised</Text>
+                        <Text fw={700}>{amountRaised}</Text>
                     </Flex>
-
-                    {/*{showActions && <Button>Donate Now</Button>}*/}
-                </Stack>
-            </Card.Section>
+                    <Flex direction="column" align="center" className={classes.stat}>
+                        <Text size="xs" color="dimmed">Donors</Text>
+                        <Text fw={700}>{contributors}</Text>
+                    </Flex>
+                </Flex>
+            </Stack>
         </Card>
     );
 };

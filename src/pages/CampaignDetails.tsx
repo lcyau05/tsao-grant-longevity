@@ -44,20 +44,22 @@ const CampaignDetailsPage = (): JSX.Element => {
     const matchesMobile = useMediaQuery('(max-width: 768px)');
 
     const paperProps: PaperProps = {
-        p: "md",
+        p: "lg",
         shadow: "sm",
+        radius: "md",
+        withBorder: true,
     }
 
     const titleProps: TitleProps = {
-        size: 32,
-        weight: 700,
+        size: 36,
+        weight: 800,
         transform: 'capitalize',
-        sx: {lineHeight: '40px'}
+        sx: {lineHeight: '44px'}
     }
 
     const subTitleProps: TextProps = {
         size: 20,
-        weight: 600,
+        weight: 700,
         sx: {lineHeight: '28px'}
     }
 
