@@ -31,7 +31,7 @@ func isSectionHeader(line string) string {
 		return "about"
 	case strings.Contains(l, "who can apply"):
 		return "whoCanApply"
-	case strings.Contains(l, "when to apply"):
+	case strings.Contains(l, "when"):
 		return "whenToApply"
 	case strings.Contains(l, "how much"):
 		return "howMuchFunding"
@@ -40,6 +40,16 @@ func isSectionHeader(line string) string {
 	default:
 		return ""
 	}
+}
+
+func extractStatus(rawText string) string {
+	l := strings.ToLower(rawText)
+
+	if strings.Contains(l, "applications closed") {
+		return "Closed"
+	}
+
+	return "Open"
 }
 
 func extractFunding(text string) string {
@@ -98,6 +108,10 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 		return nil
 	}
 
+	if strings.Contains(text, "applications closed") {
+		return nil
+	}
+
 	lines := cleanLines(raw.RawText)
 	agency, title := extractHeader(lines)
 
@@ -123,6 +137,7 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 		URL:        raw.URL,
 		Agency:     agency,
 		Title:      title,
+		Status:     extractStatus(raw.RawText), // ✅ ADD THIS
 		Funding:    extractFunding(raw.RawText),
 		Categories: extractCategories(raw.RawText),
 		Info: GrantInfo{
