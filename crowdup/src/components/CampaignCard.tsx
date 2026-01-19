@@ -44,7 +44,7 @@ const CampaignCard = ({ data }: IProps) => {
     title,
     organisation,
     description,
-    categories,
+    categories = [],
     amount,
     deadline,
     link,

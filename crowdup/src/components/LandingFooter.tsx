@@ -159,9 +159,7 @@ const LandingFooter = ({data}: FooterLinksProps) => {
                 <div className={classes.logo}>
                     <Stack align="flex-start">
                         <BrandName size={40}/>
-                        <Text size="sm">CrowdUp is a crowdfunding website that lets you raise money for anything that
-                            matters to you. From personal causes and events to projects and more. We've helped people
-                            from all over the world raise millions online.
+                        <Text size="sm">OurSG Grants portal brings government grants for the arts, community, heritage, social good, sports and youth into one place.
                         </Text>
                     </Stack>
                 </div>
@@ -169,7 +167,7 @@ const LandingFooter = ({data}: FooterLinksProps) => {
             </Container>
             <Container className={classes.afterFooter} size="lg">
                 <Text size="sm">
-                    © {new Date().getFullYear()} CrowdUp. All rights reserved.
+                    © {new Date().getFullYear()} FindGrant. All rights reserved.
                 </Text>
 
                 <Group spacing={0} className={classes.social} position="right" noWrap>

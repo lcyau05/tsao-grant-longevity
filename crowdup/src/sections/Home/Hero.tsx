@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
         paddingTop: rem(180),
         paddingBottom: rem(130),
         backgroundImage:
-            'url(https://images.unsplash.com/photo-1509099836639-18ba1795216d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80)',
+            'url(https://isomer-user-content.by.gov.sg/123/3541ba51-4218-4c9d-95df-be9330a0730f/OurSG%20Grants_900x600.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         height: rem(640),
@@ -131,36 +131,34 @@ const HeroSection = () => {
                         <Center>
                             <Group spacing={4} className={classes.badge}>
                                 <IconRocket stroke={1.5}/>
-                                <Text transform="uppercase">Make it Happen</Text>
+                                <Text transform="uppercase">OurSG Grants</Text>
                             </Group>
                         </Center>
                         <Title className={classes.title}>
-                            Help the people, make <Text
+                            Supporting social good for citizens, <Text
                             component="span"
                             inherit
                             variant="gradient"
                             gradient={{from: theme.colors.lime[5], to: theme.colors.green[4]}}
-                        >big changes</Text> and <Text
+                        >by citizens with a stress-free, </Text>  seamless grant experience on a one-stop,  <Text
                             component="span"
                             inherit
                             variant="gradient"
                             gradient={{from: theme.colors.green[4], to: theme.colors.lime[5]}}
-                        >help this world.</Text>
+                        >integrated portal.</Text>
                         </Title>
                         <Text size="lg" className={classes.description}>
-                            Join us and be part of something special. Together we can make a difference and bring your
-                            dreams to
-                            reality.
+                            OurSG Grants portal brings government grants for the arts, community, heritage, social good, sports and youth into one place.
                         </Text>
                     </Stack>
                 </Container>
 
                 <div className={classes.controls}>
                     <Button className={classes.control} variant="white" size="lg" component={Link} to="/create-campaign">
-                        Start a campaign
+                        Find My Grant
                     </Button>
                     <Button className={classes.control} variant="white" size="lg" component={Link} to="/campaigns">
-                        Explore now
+                        Explore Grants
                     </Button>
                 </div>
             </div>

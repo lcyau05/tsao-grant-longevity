@@ -226,7 +226,7 @@ const AppNavbar = ({...others}: IProps) => {
                                     </UnstyledButton>
                                 </Menu.Target>
                                 <Menu.Dropdown>
-                                    <Menu.Item
+                                    {/* <Menu.Item
                                         icon={<IconHeart
                                             size="0.9rem"
                                             color={theme.colors.red[6]}
@@ -250,7 +250,7 @@ const AppNavbar = ({...others}: IProps) => {
                                             stroke={1.5}/>}
                                     >
                                         Your comments
-                                    </Menu.Item>
+                                    </Menu.Item> */}
 
                                     <Menu.Label>Settings</Menu.Label>
                                     <Menu.Item icon={<IconSettings size="0.9rem" stroke={1.5}/>}>

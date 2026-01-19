@@ -71,3 +71,16 @@ export interface IGrantCard {
   deadline: string;
   link: string;
 }
+
+export interface GrantPreference {
+  issueAreas: string[];              // e.g. ["Youth", "Care"]
+  minFunding?: number;               // e.g. 20000
+  urgency: "urgent" | "flexible";    // derived from deadline input
+  kpis: string[];                    // e.g. ["youth_outreach"]
+}
+
+export interface GrantRecommendation {
+  grant: IGrant;
+  score: number;
+  reasons: string[];
+}

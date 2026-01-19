@@ -12,6 +12,7 @@ import {
     SignupPage
 } from "../pages";
 import {DashboardLayout, PublicLayout} from "../layout";
+import GrantRecommendationsPage from "../pages/GrantRecommendationsPage";
 
 const router = createBrowserRouter([
     {
@@ -88,6 +89,11 @@ const router = createBrowserRouter([
                 element: <CreateCampaignPage/>
             }
         ]
+    },
+    {
+        path: "recommendations",
+        element: <GrantRecommendationsPage/>,
+        errorElement: <Error404Page/>,
     },
 ]);
 
