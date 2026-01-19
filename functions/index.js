@@ -65,33 +65,62 @@
 
 
 
+// const { onSchedule } = require("firebase-functions/v2/scheduler");
+// const admin = require("firebase-admin");
+// // Ensure your scraper is imported
+// const scraper = require("./scraper.js"); 
+
+// admin.initializeApp();
+// const db = admin.firestore();
+
+// const getToday = () => {
+//     const today = new Date();
+//     // Returns DDMMYYYY
+//     return `${today.getDate()}${today.getMonth() + 1}${today.getFullYear()}`;
+// };
+
+// // V2 Syntax: Options are passed as the first argument
+// exports.dailyScraper = onSchedule({
+//     schedule: "0 0 * * *",
+//     timeZone: "Europe/Belgrade",
+//     memory: "2GiB", // V2 uses "GiB" instead of "GB"
+//     region: "us-central1"
+// }, async (event) => {
+//     try {
+//         const scrapeData = await scraper.scrapeData();
+//         await db.collection('days').doc(getToday()).set(scrapeData);
+//         console.log(`Successfully scraped data for ${getToday()}`);
+//     } catch (error) {
+//         console.error("Scraper failed:", error);
+//         // In v2, you don't necessarily need to re-throw unless you want a retry
+//     }
+// });
+
+
 const { onSchedule } = require("firebase-functions/v2/scheduler");
 const admin = require("firebase-admin");
-// Ensure your scraper is imported
-const scraper = require("./your-scraper-file"); 
+const scraper = require("./scraper");
 
 admin.initializeApp();
 const db = admin.firestore();
 
 const getToday = () => {
-    const today = new Date();
-    // Returns DDMMYYYY
-    return `${today.getDate()}${today.getMonth() + 1}${today.getFullYear()}`;
+  const today = new Date();
+  return `${today.getDate()}${today.getMonth() + 1}${today.getFullYear()}`;
 };
 
-// V2 Syntax: Options are passed as the first argument
-exports.dailyScraper = onSchedule({
+exports.dailyScraper = onSchedule(
+  {
     schedule: "0 0 * * *",
-    timeZone: "Europe/Belgrade",
-    memory: "2GiB", // V2 uses "GiB" instead of "GB"
-    region: "us-central1"
-}, async (event) => {
-    try {
-        const scrapeData = await scraper.scrapeData();
-        await db.collection('days').doc(getToday()).set(scrapeData);
-        console.log(`Successfully scraped data for ${getToday()}`);
-    } catch (error) {
-        console.error("Scraper failed:", error);
-        // In v2, you don't necessarily need to re-throw unless you want a retry
+    timeZone: "Asia/Singapore",
+    region: "asia-east1",
+    runWith: {
+      memory: "2GiB"
     }
-});
+  },
+  async () => {
+    const data = await scraper.scrapeGrantInfo();
+    await db.collection("days").doc(getToday()).set(data);
+    console.log("Scrape completed");
+  }
+);

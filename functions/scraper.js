@@ -47,18 +47,19 @@
 
 
 
-// scraper.js
-async function scrapeData() {
-    // your scraping logic here
-    return {
-      example: "This is scraped data"
-    };
-  }
+// // scraper.js
+// async function scrapeData() {
+//     // your scraping logic here
+//     return {
+//       example: "This is scraped data"
+//     };
+//   }
   
-  module.exports = { scrapeData };
+//   module.exports = { scrapeData };
 
   
   
+
 // const puppeteer = require('puppeteer');
 
 // const scrapeGrantInfo = async () => {
@@ -92,7 +93,42 @@ async function scrapeData() {
 //     return grantInfo;
 // };
 
-// scrapeGrantInfo().then(data => console.log(data));
+// // scrapeGrantInfo().then(data => console.log(data));
 
 
-// exports.scrapeGrantInfo = scrapeGrantInfo;
+// exports.scrapeData = scrapeGrantInfo;
+
+const puppeteer = require("puppeteer");
+
+const scrapeGrantInfo = async () => {
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  });
+
+  const page = await browser.newPage();
+  await page.goto(
+    "https://www.aic.sg/partners/community-care-research-grant/",
+    { waitUntil: "domcontentloaded" }
+  );
+
+  const grantInfo = await page.evaluate(() => {
+    const about = document.querySelector("#guideline")?.innerText.trim();
+    const howToApply = document.querySelector(".text")?.innerText.trim();
+
+    const documents = Array.from(
+      document.querySelectorAll("#template a.text-link")
+    ).map(a => ({
+      name: a.innerText.trim(),
+      url: a.href
+    }));
+
+    return { about, howToApply, documents };
+  });
+
+  await browser.close();
+  return grantInfo;
+};
+
+module.exports = { scrapeGrantInfo };
+
