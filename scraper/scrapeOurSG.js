@@ -1,46 +1,49 @@
-import { chromium } from "playwright";
+let chromium;
+
+async function getChromium() {
+  if (!chromium) {
+    ({ chromium } = await import("playwright"));
+  }
+  return chromium;
+}
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 /**
- * Scrape OurSG Grants "New Grants" page
- * Returns raw text for each grant detail page
+ * Scrape OurSG Grants instruction pages
+ * RETURNS RAW TEXT ONLY
  */
 export async function scrapeOurSG() {
-  // 1. Launch browser
+  const chromium = await getChromium();
   const browser = await chromium.launch({
     headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
 
   const page = await browser.newPage();
 
-  // 2. Go to OurSG Grants listing page
   await page.goto("https://oursggrants.gov.sg/grants/new", {
     waitUntil: "networkidle",
   });
 
-  // 3. Collect grant detail links
   const links = await page.$$eval("a", anchors =>
     anchors
       .map(a => a.href)
       .filter(href =>
-        href.includes("/grants/") &&
-        !href.endsWith("/grants/new")
+        href.match(/\/grants\/[a-z0-9-]+\/instruction\/?(\?.*)?$/)
       )
   );
 
-  // Remove duplicates
   const uniqueLinks = [...new Set(links)];
-
   const results = [];
 
-  // 4. Visit each grant page (LIMIT for safety)
-  for (const link of uniqueLinks.slice(0, 5)) {
+  for (const link of uniqueLinks.slice(0, 3)) {
     const grantPage = await browser.newPage();
+    await grantPage.goto(link, { waitUntil: "networkidle" });
 
-    await grantPage.goto(link, {
-      waitUntil: "networkidle",
-    });
-
-    // 5. Extract visible text
     const rawText = await grantPage.innerText("body");
 
     results.push({
@@ -50,10 +53,9 @@ export async function scrapeOurSG() {
     });
 
     await grantPage.close();
+    await sleep(4000); // avoid DOSarrest
   }
 
-  // 6. Close browser
   await browser.close();
-
   return results;
 }
