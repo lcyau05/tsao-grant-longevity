@@ -98,7 +98,8 @@ const CreateCampaignPage = () => {
         content: '',
     });
     const [orgType, setOrgType] = useState<"individual" | "organisation">("organisation");
-    const [issueAreas, setIssueAreas] = useState<string[]>([]);
+    const [primaryIssueAreas, setPrimaryIssueAreas] = useState<string[]>([]);
+    const [workIssueAreas, setWorkIssueAreas] = useState<string[]>([]);
     const [kpis, setKpis] = useState<string[]>([]);
     const [minFunding, setMinFunding] = useState<number | undefined>(undefined);
     const [urgency, setUrgency] = useState<"urgent" | "flexible">("flexible");
@@ -115,7 +116,8 @@ const CreateCampaignPage = () => {
 
     const buildPreference = (): GrantPreference => {
         return {
-            issueAreas,
+            issueAreas: primaryIssueAreas, // 🔁 mapping
+            workIssueAreas,
             minFunding,
             urgency,
             kpis,
@@ -220,8 +222,8 @@ const CreateCampaignPage = () => {
                                                 "Education & learning",
                                                 "Health & wellbeing",
                                                 "Care & support services"]}
-                                            value={issueAreas}
-                                            onChange={setIssueAreas}
+                                            value={primaryIssueAreas}
+                                            onChange={setPrimaryIssueAreas}
                                             searchable
                                         />
                                         <MultiSelect
@@ -241,8 +243,8 @@ const CreateCampaignPage = () => {
                                     {/* Issue areas */}
                                     <CategorySelect
                                         label="Issue areas you work in"
-                                        value={issueAreas}
-                                        onChange={setIssueAreas}
+                                        value={workIssueAreas}
+                                        onChange={setWorkIssueAreas}
                                     />
 
                                     {/* KPIs / outcomes */}

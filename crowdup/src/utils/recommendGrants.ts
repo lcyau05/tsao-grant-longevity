@@ -130,7 +130,7 @@
 // }
 
 import { IGrant, GrantPreference, GrantRecommendation } from "../types";
-const MIN_RECOMMENDATION_SCORE = 10;
+const MIN_RECOMMENDATION_SCORE = 0;
 export function recommendGrants(
     grants: IGrant[],
     pref: GrantPreference
@@ -160,19 +160,36 @@ function scoreGrant(
     let hasCoreMatch = false;
     const reasons: string[] = [];
 
-    /* 0️⃣ ISSUE AREA / MISSION FIT (SOFT BOOST ONLY) */
-    if (pref.issueAreas.length > 0 && grant.categories?.length) {
-        const grantText = `${grant.title} ${grant.info.about}`.toLowerCase();
+    /* 0️⃣ ISSUE AREA / MISSION FIT */
+    if (pref.issueAreas.length > 0) {
+        const categoryMatches = grant.categories?.filter(cat =>
+            pref.issueAreas.includes(cat)
+        ) ?? [];
 
-        const matches = pref.issueAreas.filter(area => {
-            const keywords = ISSUE_KEYWORDS[area] ?? [];
-            return keywords.some(k => grantText.includes(k));
-        });
-
-        if (matches.length > 0) {
+        if (categoryMatches.length > 0) {
             hasCoreMatch = true;
-            score += matches.length * 15;
-            reasons.push(`Aligns with your focus areas: ${matches.join(", ")}`);
+            score += categoryMatches.length * 20;
+            reasons.push(`Matches grant categories: ${categoryMatches.join(", ")}`);
+        } else {
+            // fallback to keyword scan
+            const grantText = [
+                grant.title,
+                grant.info.about,
+                grant.info.whoCanApply ?? "",
+            ]
+                .join(" ")
+                .toLowerCase();
+
+            const keywordMatches = pref.issueAreas.filter(area => {
+                const keywords = ISSUE_KEYWORDS[area] ?? [];
+                return keywords.some(k => grantText.includes(k));
+            });
+
+            if (keywordMatches.length > 0) {
+                hasCoreMatch = true;
+                score += keywordMatches.length * 10;
+                reasons.push(`Textually aligns with: ${keywordMatches.join(", ")}`);
+            }
         }
     }
 
@@ -269,7 +286,8 @@ function scoreGrant(
 
     // HARD REQUIREMENT ONLY IF USER SELECTED ISSUE AREAS
     if (pref.issueAreas.length > 0 && !hasCoreMatch) {
-        return { grant, score: -Infinity, reasons };
+        score -= 20;
+        reasons.push("Limited alignment with selected focus areas");
     }
 
     return { grant, score, reasons };

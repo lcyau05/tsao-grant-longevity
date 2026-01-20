@@ -78,6 +78,7 @@ export interface IGrantCard {
 export interface GrantPreference {
     issueAreas: string[];              // e.g. ["Youth", "Care"]
     // outcomes: string[];
+    workIssueAreas: string[];   
     beneficiaries?: string[];           // e.g. ["Youth", "Caregivers"]
     minFunding?: number;               // e.g. 20000
     urgency: "urgent" | "flexible";    // derived from deadline input
