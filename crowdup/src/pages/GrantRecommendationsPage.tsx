@@ -44,8 +44,14 @@ const GrantRecommendationsPage = () => {
         <Header height={60} px="md">
           <Group position="apart" sx={{ height: "100%" }}>
             {/* Left: Brand */}
-            <Title order={4}>FindGrant</Title>
-
+            <Title order={4}>
+              <Text component="span" color="rgb(39, 138, 65)" inherit>
+                Find
+              </Text>
+              <Text component="span" color="black" inherit>
+                Grant
+              </Text>
+            </Title>
             {/* Right: Actions */}
             <Group>
               <Button
