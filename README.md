@@ -4,18 +4,20 @@
 
 [Online Demo](https://crowd-up.netlify.app/ "Online Demo")
 
+### Problem Statement
+
+How might non-profit organisations “pull” information about grants from OurSG grants portal that are relevant to them according to key criteria including issue area, scope of grant, KPIs, funding quantum, application due date, etcs. so that they can strengthen their financial sustainability?
+
+
 ### About:
 
-CrowdUp is a crowdfunding platform that helps you get funding for your personal projects, charities, and NGOs. Start a fundraiser and receive donations from individuals who care about your cause.
+FindGrant is a platform that helps you look for suitable grants for your projects so no more having to manually browse grants, read PDFs, and guessing the eligibility.
 
 #### Available Pages
 
 1. Home
-2. How it works
-3. Campaigns
-4. Campaign details
-5. Create campaigns
-6. Dashboard
+2. Explore Grants
+3. Find My Grant
 
 ### Tech Stack:
 
@@ -34,6 +36,7 @@ CrowdUp is a crowdfunding platform that helps you get funding for your personal 
 Before proceeding, please ensure you have the following software installed on your computer.
 
 - Node
+- Go
 - Yarn (optional but recommended)
 - Git command line tools
 
@@ -43,7 +46,8 @@ Before proceeding, please ensure you have the following software installed on yo
     - Windows: https://git-scm.com/download/windows
     - Mac: https://git-scm.com/download/mac
 - Download Node - https://nodejs.org/en/
-- Download Yarn cli - https://yarnpkg.com/lang/en/docs/install/
+- Download Go - https://go.dev/
+- Download Yarn cli - https://go.dev/
 - Download VSCode - https://code.visualstudio.com/
 
 ### Getting started
