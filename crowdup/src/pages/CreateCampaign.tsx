@@ -187,13 +187,13 @@ const CreateCampaignPage = () => {
             </Helmet>
             <Box>
                 <Container my={36}>
-                    <Title mb="xl" align="center">Create your campaign</Title>
+                    <Title mb="xl" align="center">Grant matching preferences</Title>
                     <Stepper active={active} onStepClick={setActive} breakpoint="sm">
                         <Stepper.Step
                             label="Grant preferences"
                             description="Tell us what kind of grants you are looking for"
                         >
-                            <Title {...titleProps}>Grant matching preferences</Title>
+                            {/* <Title {...titleProps}>Grant matching preferences</Title> */}
 
                             <Paper {...paperProps}>
                                 <Stack spacing="md">
