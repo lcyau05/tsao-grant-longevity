@@ -8,7 +8,7 @@ import BrandName from "./BrandName";
 import UserCard from "./UserCard";
 import ContactCard from "./ContactCard";
 import UserButton from "./UserButton";
-import AppLinks from "./AppLinks";
+// import AppLinks from "./AppLinks";
 import CampaignsTable from "./CampaignsTable";
 import DonatorsTable from "./DonatorsTable";
 import YearlyDonationChart from "./YearlyDonationChart";
@@ -35,7 +35,7 @@ export {
     UserCard,
     ContactCard,
     UserButton,
-    AppLinks,
+    // AppLinks,
     CampaignsTable,
     DonatorsTable,
     YearlyDonationChart,

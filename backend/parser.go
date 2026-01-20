@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -14,21 +15,61 @@ func atoi(s string) int {
 	return v
 }
 
+// func extractHeader(lines []string) (string, string) {
+// 	for i, line := range lines {
+// 		if line == "INSTRUCTIONS" && i >= 2 {
+// 			agency := lines[i-2]
+// 			title := lines[i-1]
+
+// 			// Handle (AEP) on its own line
+// 			if strings.HasPrefix(title, "(") && i >= 3 {
+// 				title = lines[i-2]
+// 				agency = lines[i-3]
+// 			}
+
+// 			return agency, title
+// 		}
+// 	}
+// 	return "", ""
+// }
+
 func extractHeader(lines []string) (string, string) {
+	// 1️⃣ Try instruction-based anchor (best case)
 	for i, line := range lines {
-		if line == "INSTRUCTIONS" && i >= 2 {
-			agency := lines[i-2]
-			title := lines[i-1]
+		l := strings.ToLower(strings.TrimSpace(line))
+		if strings.Contains(l, "instruction") && i >= 2 {
+			title := strings.TrimSpace(lines[i-1])
+			agency := strings.TrimSpace(lines[i-2])
 
-			// Handle (AEP) on its own line
-			if strings.HasPrefix(title, "(") && i >= 3 {
-				title = lines[i-2]
-				agency = lines[i-3]
+			if len(title) < 5 && i >= 3 {
+				title = strings.TrimSpace(lines[i-2])
+				agency = strings.TrimSpace(lines[i-3])
 			}
-
 			return agency, title
 		}
 	}
+
+	// 2️⃣ FALLBACK: use first non-empty, non-section lines
+	var candidates []string
+	for _, line := range lines {
+		l := strings.ToLower(line)
+		if strings.Contains(l, "about this grant") ||
+			strings.Contains(l, "who can apply") ||
+			strings.Contains(l, "how to apply") {
+			break
+		}
+		if len(line) > 5 {
+			candidates = append(candidates, line)
+		}
+		if len(candidates) >= 2 {
+			break
+		}
+	}
+
+	if len(candidates) >= 2 {
+		return candidates[0], candidates[1]
+	}
+
 	return "", ""
 }
 
@@ -52,12 +93,9 @@ func isSectionHeader(line string) string {
 }
 
 func extractStatus(rawText string) string {
-	l := strings.ToLower(rawText)
-
-	if strings.Contains(l, "applications closed") {
+	if strings.Contains(strings.ToLower(rawText), "applications closed") {
 		return "Closed"
 	}
-
 	return "Open"
 }
 
@@ -151,6 +189,44 @@ func inferKPIs(text string) []string {
 	return kpis
 }
 
+func cleanHowToApply(text string) string {
+	cutMarkers := []string{
+		"OurSG Grants portal",
+		"Privacy",
+		"Terms of Use",
+		"©",
+		"Last Updated",
+	}
+
+	for _, marker := range cutMarkers {
+		if idx := strings.Index(text, marker); idx != -1 {
+			text = text[:idx]
+		}
+	}
+
+	return strings.TrimSpace(text)
+}
+
+func inferAdminLoad(text string) string {
+	l := strings.ToLower(text)
+
+	if strings.Contains(l, "audit") ||
+		strings.Contains(l, "budget form") ||
+		strings.Contains(l, "endorsement") ||
+		strings.Contains(l, "supporting documents") ||
+		strings.Contains(l, "report") {
+		return "high"
+	}
+
+	if strings.Contains(l, "proposal") ||
+		strings.Contains(l, "assessment") ||
+		strings.Contains(l, "eligibility") {
+		return "medium"
+	}
+
+	return "low"
+}
+
 func ParseGrant(raw RawGrant) *ParsedGrant {
 	text := strings.ToLower(raw.RawText)
 
@@ -158,25 +234,17 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 	if raw.RawText == "" ||
 		strings.Contains(text, "dosarrest") ||
 		strings.Contains(text, "too many requests") {
+		fmt.Println("🚫 DOSARREST PAGE:", raw.URL)
 		return nil
 	}
 
 	// 🚫 2. Closed grants
-	if strings.Contains(text, "applications closed") {
-		return nil
-	}
-
-	if strings.Contains(text, "applications closed") {
-		return nil
-	}
+	// if strings.Contains(text, "applications closed") {
+	// 	return nil
+	// }
 
 	lines := cleanLines(raw.RawText)
 	agency, title := extractHeader(lines)
-
-	// 🚫 3. Invalid structure (VERY IMPORTANT)
-	if agency == "" || title == "" {
-		return nil
-	}
 
 	sections := map[string]string{}
 	current := ""
@@ -191,6 +259,22 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 		}
 	}
 
+	// if agency == "" || title == "" {
+	// 	fmt.Println("❌ Header not found for:", raw.URL)
+	// 	return nil
+	// }
+
+	if agency == "" {
+		agency = "Unknown Agency"
+	}
+	if title == "" {
+		title = "Untitled Grant"
+	}
+
+	adminText := sections["about"] +
+		sections["whoCanApply"] +
+		sections["howToApply"]
+
 	return &ParsedGrant{
 		URL:        raw.URL,
 		Agency:     agency,
@@ -200,12 +284,13 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 		FundingCap: extractFundingCap(raw.RawText),
 		Categories: extractCategories(raw.RawText),
 		KPIs:       inferKPIs(raw.RawText),
+		adminLoad:  inferAdminLoad(adminText),
 		Info: GrantInfo{
 			About:       sections["about"],
 			WhoCanApply: sections["whoCanApply"],
 			WhenToApply: normalizeWhenToApply(sections["whenToApply"]),
 			HowMuch:     sections["howMuchFunding"],
-			HowToApply:  sections["howToApply"],
+			HowToApply:  cleanHowToApply(sections["howToApply"]),
 		},
 	}
 }

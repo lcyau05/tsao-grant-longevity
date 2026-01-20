@@ -11,26 +11,6 @@ import {Box, BoxProps, Container, Text, TextProps, Title, TitleProps} from "@man
 import {Helmet} from "react-helmet";
 
 const HomePage = (): JSX.Element => {
-    const boxProps: BoxProps = {
-        mt: 96,
-        mb: 136,
-        py: 48
-    }
-
-    // const titleProps: TitleProps = {
-    //     size: 32,
-    //     weight: 800,
-    //     mb: "lg",
-    //     transform: 'capitalize',
-    //     sx: {lineHeight: '40px'}
-    // }
-
-    // const subTitleProps: TextProps = {
-    //     size: 20,
-    //     weight: 700,
-    //     mb: "md",
-    //     sx: {lineHeight: '28px'}
-    // }
 
     return (
         <>
@@ -39,24 +19,6 @@ const HomePage = (): JSX.Element => {
             </Helmet>
             <Box>
                 <HeroSection/>
-                <Container>
-                    <Box {...boxProps}>
-                        {/* <TitleBadge title="About us"/>
-                        <Title {...titleProps}>more people more impact</Title>
-                        <Text {...subTitleProps}>Because together, we can make a real difference. Our volunteers service
-                            in a
-                            variety of roles according to their skills and interests.</Text> */}
-                    </Box>
-                    {/* <FeaturesSection boxProps={boxProps} subtitleProps={subTitleProps}/>
-                    <StatsSection boxProps={boxProps} titleProps={titleProps} subtitleProps={subTitleProps}/>
-                    <JoinUsSection boxProps={boxProps} titleProps={titleProps} subtitleProps={subTitleProps}/> */}
-                </Container>
-                {/* <WaysToFundSection boxProps={boxProps} titleProps={titleProps} subtitleProps={subTitleProps}/>
-                <Container>
-                    <TestimonialsSection boxProps={boxProps} titleProps={titleProps}/>
-                    <CampaignsSection boxProps={boxProps} titleProps={titleProps} subtitleProps={subTitleProps}/>
-                    <GetStartedSection boxProps={boxProps} titleProps={titleProps}/>
-                </Container> */}
             </Box>
         </>
     );

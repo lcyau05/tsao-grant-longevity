@@ -18,16 +18,24 @@ interface CategorySelectProps {
     onChange: (value: string[]) => void;
 }
 
-const categories = [
-    { value: "medical", label: "Medical" },
-    { value: "emergency", label: "Emergency" },
-    { value: "environment", label: "Environment" },
-    { value: "nonprofit", label: "Non-profit" },
-    { value: "financial", label: "Financial emergency" },
-    { value: "animals", label: "Animals" },
-    { value: "crisis", label: "Crisis relief" },
-    { value: "technology", label: "Technology" },
-    { value: "media", label: "Film & videos" },
+export const categories = [
+    { value: "healthcare", label: "Healthcare & Wellbeing" },
+    { value: "mental_health", label: "Mental Health" },
+    { value: "ageing", label: "Ageing & Elderly Care" },
+    { value: "disability", label: "Disability & Special Needs" },
+    { value: "caregivers", label: "Caregivers Support" },
+
+    { value: "community", label: "Community Development" },
+    { value: "family", label: "Family & Children Services" },
+    { value: "youth", label: "Youth Development" },
+    { value: "low_income", label: "Low-Income & Financial Assistance" },
+
+    { value: "education", label: "Education & Lifelong Learning" },
+    { value: "employment", label: "Employment & Workforce Support" },
+
+    { value: "social_innovation", label: "Social Innovation & Pilots" },
+    { value: "digitalisation", label: "Digitalisation & Technology Adoption" },
+    { value: "capacity_building", label: "Organisational Capacity Building" },
 ];
 
 const CategorySelect = ({

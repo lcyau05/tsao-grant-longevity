@@ -24,7 +24,7 @@ const CheckoutPaymentModal = ({...others}: IProps) => {
             <CampaignCard data={campaignsData.data[0]}/>
             <Paper>
                 <NumberInput label="Enter your donation amount"/>
-                <Checkbox label="Hide your donation amount on CrowdUp"/>
+                <Checkbox label="Hide your donation amount on FindGrant"/>
                 <Textarea label="Leave a Comment"/>
             </Paper>
             <Paper>

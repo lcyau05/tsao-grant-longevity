@@ -1,88 +1,80 @@
 {
   "data": [
     {
-      "title": "Fundraisers for",
+      "title": "Find grants by focus area",
       "links": [
         {
-          "label": "Medical",
+          "label": "Community Development",
+          "link": "https://oursggrants.gov.sg"
+        },
+        {
+          "label": "Youth & Education",
+          "link": "https://oursggrants.gov.sg"
+        },
+        {
+          "label": "Health & Wellbeing",
+          "link": "https://oursggrants.gov.sg"
+        },
+        {
+          "label": "Elderly Care & Ageing",
+          "link": "https://oursggrants.gov.sg"
+        },
+        {
+          "label": "Caregivers & Families",
+          "link": "https://oursggrants.gov.sg"
+        },
+        {
+          "label": "Digital & Capacity Building",
+          "link": "https://oursggrants.gov.sg"
+        }
+      ]
+    },
+    {
+      "title": "Grant discovery",
+      "links": [
+        {
+          "label": "Find grants for my organisation",
+          "link": "/create-campaign"
+        },
+        {
+          "label": "How grant matching works",
           "link": "#"
         },
         {
-          "label": "Emergency",
+          "label": "Understanding eligibility criteria",
           "link": "#"
         },
         {
-          "label": "Environment",
+          "label": "Funding timelines & deadlines",
           "link": "#"
         },
         {
-          "label": "Nonprofit",
-          "link": "#"
-        },
-        {
-          "label": "Crisis Relief",
-          "link": "#"
-        },
-        {
-          "label": "Film & Videos",
+          "label": "Common grant application requirements",
           "link": "#"
         }
       ]
     },
     {
-      "title": "Learn more",
+      "title": "About & resources",
       "links": [
         {
-          "label": "How CrowdUp Works",
+          "label": "About FindGrants",
           "link": "#"
         },
         {
-          "label": "Why CrowdUp",
+          "label": "Powered by OurSG Grants",
+          "link": "https://oursggrants.gov.sg"
+        },
+        {
+          "label": "Grant application tips",
           "link": "#"
         },
         {
-          "label": "Frequently Asked Questions",
+          "label": "Non-profit & community resources",
           "link": "#"
         },
         {
-          "label": "Success Stories",
-          "link": "#"
-        },
-        {
-          "label": "Supported Countries",
-          "link": "#"
-        },
-        {
-          "label": "Charity Fundraising",
-          "link": "#"
-        }
-      ]
-    },
-    {
-      "title": "Resources",
-      "links": [
-        {
-          "label": "What is crowdfunding?",
-          "link": "#"
-        },
-        {
-          "label": "Help center",
-          "link": "#"
-        },
-        {
-          "label": "Blog",
-          "link": "#"
-        },
-        {
-          "label": "CrowdUp Stories",
-          "link": "#"
-        },
-        {
-          "label": "Careers",
-          "link": "#"
-        },
-        {
-          "label": "About",
+          "label": "Contact & support",
           "link": "#"
         }
       ]

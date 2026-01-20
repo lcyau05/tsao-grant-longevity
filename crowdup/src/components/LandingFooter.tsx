@@ -1,4 +1,4 @@
-import {ActionIcon, Container, createStyles, Group, rem, Stack, Text} from '@mantine/core';
+import { ActionIcon, Container, createStyles, Group, rem, Stack, Text } from '@mantine/core';
 import {
     IconBrandFacebook,
     IconBrandGithub,
@@ -6,7 +6,7 @@ import {
     IconBrandLinkedin,
     IconBrandTwitter
 } from '@tabler/icons-react';
-import {BrandName} from "./index";
+import { BrandName } from "./index";
 
 const useStyles = createStyles((theme) => ({
     footer: {
@@ -14,9 +14,8 @@ const useStyles = createStyles((theme) => ({
         paddingTop: `calc(${theme.spacing.xl} * 2)`,
         paddingBottom: `calc(${theme.spacing.xl} * 2)`,
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-        borderTop: `${rem(1)} solid ${
-            theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
-        }`,
+        borderTop: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
+            }`,
     },
 
     logo: {
@@ -56,6 +55,7 @@ const useStyles = createStyles((theme) => ({
     groups: {
         display: 'flex',
         flexWrap: 'wrap',
+        gap: theme.spacing.xl, // 👈 MAIN FIX (even spacing)
 
         [theme.fn.smallerThan('md')]: {
             marginLeft: 12
@@ -84,8 +84,8 @@ const useStyles = createStyles((theme) => ({
         display: 'block',
         color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[6],
         fontSize: theme.fontSizes.sm,
-        paddingTop: rem(3),
-        paddingBottom: rem(3),
+        paddingTop: rem(5),
+        paddingBottom: rem(5),
 
         '&:hover': {
             textDecoration: 'underline',
@@ -95,7 +95,8 @@ const useStyles = createStyles((theme) => ({
     title: {
         fontSize: theme.fontSizes.lg,
         fontWeight: 700,
-        marginBottom: `calc(${theme.spacing.xs} / 2)`,
+        // marginBottom: `calc(${theme.spacing.xs} / 2)`,
+        marginBottom: theme.spacing.xs, // 👈 cleaner rhythm
         color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
 
@@ -106,9 +107,8 @@ const useStyles = createStyles((theme) => ({
         marginTop: theme.spacing.xl,
         paddingTop: theme.spacing.xl,
         paddingBottom: theme.spacing.xl,
-        borderTop: `${rem(1)} solid ${
-            theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
-        }`,
+        borderTop: `${rem(1)} solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
+            }`,
 
         [theme.fn.smallerThan('sm')]: {
             flexDirection: 'column',
@@ -129,8 +129,8 @@ interface FooterLinksProps {
     }[];
 }
 
-const LandingFooter = ({data}: FooterLinksProps) => {
-    const {classes} = useStyles();
+const LandingFooter = ({ data }: FooterLinksProps) => {
+    const { classes } = useStyles();
 
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
@@ -158,7 +158,7 @@ const LandingFooter = ({data}: FooterLinksProps) => {
             <Container className={classes.inner} size="lg">
                 <div className={classes.logo}>
                     <Stack align="flex-start">
-                        <BrandName size={40}/>
+                        <BrandName size={40} />
                         <Text size="sm">OurSG Grants portal brings government grants for the arts, community, heritage, social good, sports and youth into one place.
                         </Text>
                     </Stack>
@@ -172,19 +172,19 @@ const LandingFooter = ({data}: FooterLinksProps) => {
 
                 <Group spacing={0} className={classes.social} position="right" noWrap>
                     <ActionIcon size="lg" component="a" href="https://github.com/kelvink96" target="_blank">
-                        <IconBrandGithub size="20" stroke={2}/>
+                        <IconBrandGithub size="20" stroke={2} />
                     </ActionIcon>
                     <ActionIcon size="lg" component="a" href="https://twitter.com/kelvink_96" target="_blank">
-                        <IconBrandTwitter size="20" stroke={2}/>
+                        <IconBrandTwitter size="20" stroke={2} />
                     </ActionIcon>
                     <ActionIcon size="lg" component="a" href="https://www.facebook.com/kelvinkk96" target="_blank">
-                        <IconBrandFacebook size="20" stroke={2}/>
+                        <IconBrandFacebook size="20" stroke={2} />
                     </ActionIcon>
                     <ActionIcon size="lg" component="a" href="https://www.instagram.com/kelvink_96/" target="_blank">
-                        <IconBrandInstagram size="20" stroke={2}/>
+                        <IconBrandInstagram size="20" stroke={2} />
                     </ActionIcon>
                     <ActionIcon size="lg" component="a" href="https://www.linkedin.com/in/kelvink96/" target="_blank">
-                        <IconBrandLinkedin size="20" stroke={2}/>
+                        <IconBrandLinkedin size="20" stroke={2} />
                     </ActionIcon>
                 </Group>
             </Container>

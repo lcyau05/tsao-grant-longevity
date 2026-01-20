@@ -16,6 +16,7 @@
       "youth_outreach",
       "health_outcomes"
     ],
+    "adminLoad": "high",
     "info": {
       "about": "We support community sporting events/projects that fulfil any of the following objectives: Engage the community with meaningful and impactful volunteering opportunities. Demonstrate innovative ways of engaging and inspiring the community through sport, physical activity or health \u0026 wellness initiatives. Incorporate elements of “Care” that contribute towards building a caring society e.g. by providing opportunities for social mixing among different groups, offering volunteering platforms for the community to give back to society, rallying participation and contribution behind a good cause. ",
       "whoCanApply": "Anyone can apply, but Team Nila projects should promote/involve sport volunteerism, while YouthCreates projects should support youth-led sporting initiatives and Team Singapore projects should strengthen affinity for Team Singapore athletes. More details on eligibility are available in the grant guidelines. ",
@@ -24,13 +25,13 @@
         "applicationType": "open_all_year"
       },
       "howMuchFunding": "YouthCreates, Team Nila \u0026 Team Singapore are capped at $20,000. ",
-      "howToApply": "Completing the grant application should take about 30 mins with all the information on hand. All fields are mandatory unless otherwise stated. DOCUMENTS REQUIRED FOR APPLICATION Complete the following documents and upload them to the relevant sections of the form before you submit your application: Active Citizen_Project_Proposal_V1 (DOCX 62.9 KB) Active Citizen Budget Form (XLSX 19.9 KB) Active Citizen_Consent Form (DOCX 23.3 KB) (if below 18 years old) Total upload size per submission must not exceed 50MB. APPLY AS AN INDIVIDUAL APPLY AS AN ORGANISATION You will be directed to login via Singpass. Upon successful login, select the relevant UEN ID. Can’t find what you are looking for? To find more information about our grants, visit our help center. To explore more community grants in Singapore, visit the community grants register If you have questions or suggestions about our portal, we'd love to hear from you. OurSG Grants OurSG Grants portal brings government grants for the arts, community, heritage, social good, sports and youth into one place. Report Vulnerability Privacy Terms of Use Developed by Government Digital Products A Division of Government Technology Agency Singapore © 2026 Government of Singapore. Last Updated 19 Jan 2026 v2.59.2 This site is best viewed using the latest two versions of Chrome, Safari, Microsoft Edge and Firefox. "
+      "howToApply": "Completing the grant application should take about 30 mins with all the information on hand. All fields are mandatory unless otherwise stated. DOCUMENTS REQUIRED FOR APPLICATION Complete the following documents and upload them to the relevant sections of the form before you submit your application: Active Citizen_Project_Proposal_V1 (DOCX 62.9 KB) Active Citizen Budget Form (XLSX 19.9 KB) Active Citizen_Consent Form (DOCX 23.3 KB) (if below 18 years old) Total upload size per submission must not exceed 50MB. APPLY AS AN INDIVIDUAL APPLY AS AN ORGANISATION You will be directed to login via Singpass. Upon successful login, select the relevant UEN ID. Can’t find what you are looking for? To find more information about our grants, visit our help center. To explore more community grants in Singapore, visit the community grants register If you have questions or suggestions about our portal, we'd love to hear from you. OurSG Grants"
     }
   },
   {
     "url": "https://oursggrants.gov.sg/grants/nycaep/instruction",
-    "agency": "NATIONAL YOUTH COUNCIL",
-    "title": "ASIA-READY EXPOSURE PROGRAMME",
+    "agency": "ASIA-READY EXPOSURE PROGRAMME",
+    "title": "(AEP)",
     "status": "Open",
     "funding": "Up to S$1,000 per eligible youth, subject to a grant cap* per institution per financial year",
     "fundingCap": 1000,
@@ -41,6 +42,7 @@
       "community_engagement",
       "youth_outreach"
     ],
+    "adminLoad": "high",
     "info": {
       "about": "The Asia-Ready Exposure Programme (AEP) supports educational institutions based and registered in Singapore to provide youths with opportunities to gain industry and cultural exposure to ASEAN member states, China and/or India (ACI). The AEP aims to: Increase youth awareness and understanding of the social, cultural and political dimensions of the ACI cities; Increase awareness of the economic growth trajectories and opportunities in the ACI markets; and Broaden personal growth opportunities and youth ACI networks. Interested applicants are to read the AEP Factsheet and FAQ, complete the online application and submit the required documents to NYC at least 3 months before the proposed AEP Project Start Date. ",
       "whoCanApply": "Institutes of Higher Learning (IHLs, e.g. Institute of Technical Education, Polytechnic, University, Private Education Institution, Madrasah) based and registered in Singapore ",
@@ -54,7 +56,110 @@
         }
       },
       "howMuchFunding": "Up to S$1,000 per eligible youth, subject to a grant cap* per institution per financial year *confirmed annually on a case-by-case basis Eligible youths refer to youths who meet all 4 criteria below: 15 to 35 years old; Singapore Citizens or Singapore Permanent Residents (PR); Currently studying in Institutes of Higher Learning (e.g. ITE Colleges, Polytechnics, Universities, Private Education Institutions, Madrasah etc.); and Have not been funded under the same life stage (i.e. education level) before. The grant will generally be disbursed in two tranches, depending on the duration of the project and other consideration factors. The remaining grant will be disbursed upon fulfilment of the deliverables and receipt of satisfactory report(s) of the project. ",
-      "howToApply": "Completing the grant application should take about 30 mins with all the information on hand. All fields are mandatory unless otherwise stated. DOCUMENTS REQUIRED FOR APPLICATION Complete the following documents and upload them to the relevant sections of the form before you submit your application. For Adhoc Application: AEP Proposal and Endorsement Letter AEP Budget OSG AEP Name List (if ready) Any other supporting information (e.g. powerpoint presentation, detailed programme itinerary, corporate deck etc.) For Programme Funding Partners: Updated AEP PF Dashboard at least 1 to 2 months prior to the start date of the trip(s) OSG AEP Name List (if ready) Detailed Day-to-Day Itinerary (if available) Signed Partnership Agreement and Partner’s Proposal as indicated in the Partnership Agreement (if available) [For Adhoc Application / Programme Funding Partners] Additional documents you may need to submit: Copies of relevant permits and licenses (if any) Declaration of all potential sponsorships and partnership (if any) Total upload size per submission must not exceed 50MB. APPLY AS AN ORGANISATION You will be directed to login via Singpass. Upon successful login, select the relevant UEN ID. Can’t find what you are looking for? To find more information about our grants, visit our help center. To explore more community grants in Singapore, visit the community grants register If you have questions or suggestions about our portal, we'd love to hear from you. OurSG Grants OurSG Grants portal brings government grants for the arts, community, heritage, social good, sports and youth into one place. Report Vulnerability Privacy Terms of Use Developed by Government Digital Products A Division of Government Technology Agency Singapore © 2026 Government of Singapore. Last Updated 19 Jan 2026 v2.59.2 This site is best viewed using the latest two versions of Chrome, Safari, Microsoft Edge and Firefox. "
+      "howToApply": "Completing the grant application should take about 30 mins with all the information on hand. All fields are mandatory unless otherwise stated. DOCUMENTS REQUIRED FOR APPLICATION Complete the following documents and upload them to the relevant sections of the form before you submit your application. For Adhoc Application: AEP Proposal and Endorsement Letter AEP Budget OSG AEP Name List (if ready) Any other supporting information (e.g. powerpoint presentation, detailed programme itinerary, corporate deck etc.) For Programme Funding Partners: Updated AEP PF Dashboard at least 1 to 2 months prior to the start date of the trip(s) OSG AEP Name List (if ready) Detailed Day-to-Day Itinerary (if available) Signed Partnership Agreement and Partner’s Proposal as indicated in the Partnership Agreement (if available) [For Adhoc Application / Programme Funding Partners] Additional documents you may need to submit: Copies of relevant permits and licenses (if any) Declaration of all potential sponsorships and partnership (if any) Total upload size per submission must not exceed 50MB. APPLY AS AN ORGANISATION You will be directed to login via Singpass. Upon successful login, select the relevant UEN ID. Can’t find what you are looking for? To find more information about our grants, visit our help center. To explore more community grants in Singapore, visit the community grants register If you have questions or suggestions about our portal, we'd love to hear from you. OurSG Grants"
+    }
+  },
+  {
+    "url": "https://oursggrants.gov.sg/grants/community-dev",
+    "agency": "MINISTRY OF SOCIAL AND FAMILY DEVELOPMENT",
+    "title": "Community Development Grant",
+    "status": "Open",
+    "funding": "Up to $50,000",
+    "fundingCap": 50000,
+    "categories": [
+      "Community"
+    ],
+    "kpis": [
+      "community_engagement",
+      "volunteer_engagement"
+    ],
+    "adminLoad": "medium",
+    "info": {
+      "about": "Supports community-driven initiatives that strengthen social cohesion, volunteerism and civic participation among residents.",
+      "whoCanApply": "Registered non-profit organisations and community groups.",
+      "whenToApply": {
+        "rawText": "Open throughout the year.",
+        "applicationType": "open_all_year"
+      }
+    }
+  },
+  {
+    "url": "https://oursggrants.gov.sg/grants/youth-innovation",
+    "agency": "NATIONAL YOUTH COUNCIL",
+    "title": "Youth Innovation Grant",
+    "status": "Open",
+    "funding": "Up to $15,000",
+    "fundingCap": 15000,
+    "categories": [
+      "Youth",
+      "Innovation"
+    ],
+    "kpis": [
+      "youth_outreach",
+      "community_engagement"
+    ],
+    "adminLoad": "low",
+    "info": {
+      "about": "Funds youth-led pilot projects that address community needs through innovative approaches.",
+      "whoCanApply": "Youth groups and individuals aged 15 to 35.",
+      "whenToApply": {
+        "rawText": "Applications accepted quarterly.",
+        "applicationType": "relative",
+        "relative": {
+          "amount": 1,
+          "unit": "month",
+          "reference": "submission_deadline"
+        }
+      }
+    }
+  },
+  {
+    "url": "https://oursggrants.gov.sg/grants/eldercare",
+    "agency": "AGENCY FOR INTEGRATED CARE",
+    "title": "Elderly Care Support Grant",
+    "status": "Open",
+    "funding": "Up to $100,000",
+    "fundingCap": 100000,
+    "categories": [
+      "Care",
+      "Elderly"
+    ],
+    "kpis": [
+      "health_outcomes",
+      "community_engagement"
+    ],
+    "adminLoad": "high",
+    "info": {
+      "about": "Supports programmes that enhance wellbeing, care access and social inclusion for seniors.",
+      "whoCanApply": "Registered charities and IPCs providing eldercare services.",
+      "whenToApply": {
+        "rawText": "Annual call for proposals.",
+        "applicationType": "fixed"
+      }
+    }
+  },
+  {
+    "url": "https://oursggrants.gov.sg/grants/digital-capability",
+    "agency": "IMDA",
+    "title": "Digital Capability Grant",
+    "status": "Open",
+    "funding": "Up to $30,000",
+    "fundingCap": 30000,
+    "categories": [
+      "Technology",
+      "Capacity"
+    ],
+    "kpis": [
+      "capacity_building"
+    ],
+    "adminLoad": "medium",
+    "info": {
+      "about": "Supports organisations in adopting digital tools to improve service delivery and operational efficiency.",
+      "whoCanApply": "Registered non-profit organisations.",
+      "whenToApply": {
+        "rawText": "Open all year.",
+        "applicationType": "open_all_year"
+      }
     }
   }
 ]

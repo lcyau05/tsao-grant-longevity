@@ -39,48 +39,57 @@ export interface ICurrency {
 }
 
 export interface IGrant {
-  url: string;
-  agency: string;
-  title: string;
-  status: string;
-  funding: string;
-  fundingCap?: number;
-  categories: string[];
-  kpis: string[];
-  info: {
-    about: string;
-    whoCanApply: string;
-    whenToApply: {
-      applicationType: string;
-      rawText: string;
-      relative?: {
-        amount: number;
-        unit: string;
-        reference: string;
-      };
+    url: string;
+    agency: string;
+    title: string;
+    status: string;
+    funding: string;
+    beneficiaries?: string[];           // e.g. ["Youth", "Caregivers"]
+    fundingCap?: number;
+    categories: string[];
+    kpis: string[];
+    adminLoad: "low" | "medium" | "high"; // ✅ ADD
+    info: {
+        about: string;
+        whoCanApply: string;
+        whenToApply: {
+            applicationType: string;
+            rawText: string;
+            relative?: {
+                amount: number;
+                unit: string;
+                reference: string;
+            };
+        };
+        howToApply?: string;
     };
-  };
 }
 
 export interface IGrantCard {
-  title: string;
-  organisation: string;
-  description: string;
-  categories: string[];
-  amount: number;
-  deadline: string;
-  link: string;
+    title: string;
+    organisation: string;
+    description: string;
+    categories: string[];
+    amount: number;
+    deadline: string;
+    link: string;
 }
 
 export interface GrantPreference {
-  issueAreas: string[];              // e.g. ["Youth", "Care"]
-  minFunding?: number;               // e.g. 20000
-  urgency: "urgent" | "flexible";    // derived from deadline input
-  kpis: string[];                    // e.g. ["youth_outreach"]
+    issueAreas: string[];              // e.g. ["Youth", "Care"]
+    // outcomes: string[];
+    beneficiaries?: string[];           // e.g. ["Youth", "Caregivers"]
+    minFunding?: number;               // e.g. 20000
+    urgency: "urgent" | "flexible";    // derived from deadline input
+    kpis: string[];                    // e.g. ["youth_outreach"]
+    fundingType: "one_off" | "recurring" | "either";
+    adminTolerance: "low" | "medium" | "high";
+    followUpWillingness: boolean;
 }
 
 export interface GrantRecommendation {
-  grant: IGrant;
-  score: number;
-  reasons: string[];
+    grant: IGrant;
+    beneficiaries?: string[];           // e.g. ["Youth", "Caregivers"]
+    score: number;
+    reasons: string[];
 }

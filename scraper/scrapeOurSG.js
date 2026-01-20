@@ -40,7 +40,7 @@ export async function scrapeOurSG() {
   const uniqueLinks = [...new Set(links)];
   const results = [];
 
-  for (const link of uniqueLinks.slice(0, 3)) {
+  for (const link of uniqueLinks.slice(0, 3)) { //OurSG Grants only allowed 2 instruction page load. DOS protection. 
     const grantPage = await browser.newPage();
     await grantPage.goto(link, { waitUntil: "networkidle" });
 
