@@ -1,80 +1,235 @@
-![image](https://github.com/design-sparx/crowdup/assets/26582923/001cd476-c753-4087-96a6-ee8c99fc3612)
+# FindGrant
 
-# Crowdfunding website project
+A comprehensive grant discovery and recommendation platform that helps users find relevant funding opportunities through intelligent matching and personalized recommendations.
 
-[Online Demo](https://crowd-up.netlify.app/ "Online Demo")
+## About
 
-### About:
+FindGrant is a full-stack application that scrapes grant data from various sources, processes it through AI-powered analysis, and provides users with personalized grant recommendations based on their project profiles and needs.
 
-CrowdUp is a crowdfunding platform that helps you get funding for your personal projects, charities, and NGOs. Start a fundraiser and receive donations from individuals who care about your cause.
+## Architecture
 
-#### Available Pages
+The project consists of three main components:
 
-1. Home
-2. How it works
-3. Campaigns
-4. Campaign details
-5. Create campaigns
-6. Dashboard
+### Frontend (React/TypeScript)
+A modern web application built with React, TypeScript, and Mantine UI that provides an intuitive interface for users to discover and explore grant opportunities.
 
-### Tech Stack:
+### Backend (Go)
+A REST API server written in Go that serves processed grant data and handles data processing operations.
 
-- embla-carousel-react v7 - https://www.embla-carousel.com/get-started/
-- mantine v6 - https://mantine.dev/pages/getting-started/
-- react v18 - https://reactjs.org/docs/getting-started.html
-- tabler-icons v2- https://react-icons.github.io/react-icons/
+### Scraper (Node.js)
+A web scraping service built with Node.js and Playwright that collects grant information from various government and foundation websites.
 
-**Dev dependencies**
+## Tech Stack
 
-- eslint v8 - https://eslint.org/docs/latest/user-guide/getting-started- 
-- vite v4 - https://vitejs.dev/
+### Frontend
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Mantine v6** - Component library
+- **React Router** - Client-side routing
+- **ApexCharts** - Data visualization
+- **Day.js** - Date manipulation
+- **Tabler Icons** - Icon library
 
-### Software
+### Backend
+- **Go 1.25.5** - Programming language
+- **Standard library** - HTTP server and JSON handling
 
-Before proceeding, please ensure you have the following software installed on your computer.
+### Scraper
+- **Node.js** - Runtime environment
+- **Express** - Web framework
+- **Playwright** - Browser automation for scraping
 
-- Node
-- Yarn (optional but recommended)
-- Git command line tools
+## Prerequisites
 
-### Useful links
+Before running this project, ensure you have the following installed:
 
-- Download Git cli -
-    - Windows: https://git-scm.com/download/windows
-    - Mac: https://git-scm.com/download/mac
-- Download Node - https://nodejs.org/en/
-- Download Yarn cli - https://yarnpkg.com/lang/en/docs/install/
-- Download VSCode - https://code.visualstudio.com/
+- **Node.js** (v16 or higher) - https://nodejs.org/
+- **Go** (v1.19 or higher) - https://golang.org/dl/
+- **Git** - https://git-scm.com/
+- **Yarn** (optional but recommended) - https://yarnpkg.com/
 
-### Getting started
+## Installation
 
-Please fork a copy of this repository. Forking a repository allows you to freely experiment with changes without affecting the original project. Alternatively download or clone the master branch.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd findgrant
+   ```
 
-##### Download & Install Dependencies on your machine
+2. **Install frontend dependencies**
+   ```bash
+   cd crowdup
+   yarn install
+   # or
+   npm install
+   ```
 
-Clone the repo to your machine
-`git clone <CloneURL>`
+3. **Install scraper dependencies**
+   ```bash
+   cd ../scraper
+   npm install
+   ```
 
-##### Launch the frontend
+4. **The backend requires no additional dependencies** (uses only Go standard library)
 
-1. Open a new terminal window and navigate in your root folder
-   `cd <../root>`
-   `yarn install OR npm install`
-2. Run the start script
-   `yarn run start OR npm run start`
+## Usage
 
-Your app should be running on: http://localhost:3000
+### Running the Scraper
 
-### Versions
+The scraper collects grant data from external sources:
 
-v1.0
+```bash
+cd scraper
+npm start
+# or for development
+node index.js
+```
 
-- Default project implementation
+**Endpoints:**
+- `GET /` - Health check
+- `GET /scrape` - Trigger scraping process
 
-### Authors
+The scraper will save data to `scraped_grants.json`.
 
-1. Kelvin Kiptum Kiprop - https://github.com/kelvink96
+### Running the Backend
 
-### License
+The backend serves processed grant data:
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/kelvink96ltd/flick-city/blob/master/LICENSE.md) file for details
+```bash
+cd backend
+go run main.go
+```
+
+**API Endpoints:**
+- `GET /grants` - Returns all parsed grants as JSON
+
+Server runs on `http://localhost:8081`
+
+### Running the Frontend
+
+Start the development server:
+
+```bash
+cd crowdup
+yarn dev
+# or
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+### Build for Production
+
+```bash
+cd crowdup
+yarn build
+# or
+npm run build
+```
+
+## Project Structure
+
+```
+findgrant/
+├── crowdup/                 # Frontend React application
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── pages/          # Page components
+│   │   ├── sections/       # Home page sections
+│   │   ├── utils/          # Utility functions
+│   │   ├── types/          # TypeScript type definitions
+│   │   └── theme/          # UI theme configuration
+│   ├── public/             # Static assets
+│   └── package.json
+├── backend/                # Go API server
+│   ├── main.go            # Server entry point
+│   ├── models.go          # Data structures
+│   ├── parser.go          # Data parsing logic
+│   ├── utils.go           # Utility functions
+│   └── parsed_grants.json # Processed grant data
+├── scraper/               # Node.js scraping service
+│   ├── index.js           # Express server
+│   ├── scrapeOurSG.js     # Scraping logic
+│   ├── parser.js          # Data parsing
+│   └── scraped_grants.json # Raw scraped data
+└── README.md
+```
+
+## API Documentation
+
+### Backend API
+
+#### GET /grants
+
+Returns a JSON array of parsed grant objects.
+
+**Response Format:**
+```json
+[
+  {
+    "url": "https://example.com/grant",
+    "agency": "Government Agency",
+    "title": "Grant Title",
+    "status": "Open",
+    "funding": "$50,000",
+    "fundingCap": 50000,
+    "categories": ["Education", "Technology"],
+    "kpis": ["Impact", "Sustainability"],
+    "info": {
+      "about": "Grant description...",
+      "whoCanApply": "Eligibility criteria...",
+      "whenToApply": {
+        "rawText": "Applications due...",
+        "applicationType": "Rolling",
+        "deadlineHint": "Ongoing"
+      },
+      "howMuch": "Up to $50,000",
+      "howToApply": "Application instructions..."
+    }
+  }
+]
+```
+
+## Development
+
+### Frontend Development
+
+```bash
+cd crowdup
+yarn dev          # Start dev server
+yarn build        # Build for production
+yarn lint         # Run ESLint
+yarn preview      # Preview production build
+```
+
+### Backend Development
+
+```bash
+cd backend
+go run main.go    # Run server
+go build         # Build binary
+```
+
+### Scraper Development
+
+```bash
+cd scraper
+node index.js     # Run scraper server
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Authors
+
+- Development Team - Tsao Foundation Hackathon Project
