@@ -134,7 +134,7 @@ const LandingFooter = ({ data }: FooterLinksProps) => {
 
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
-            <Text<'a'>
+            <Text
                 key={index}
                 className={classes.link}
                 component="a"

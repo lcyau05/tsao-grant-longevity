@@ -134,12 +134,12 @@ const LandingFooter = ({data}: FooterLinksProps) => {
 
     const groups = data.map((group) => {
         const links = group.links.map((link, index) => (
-            <Text<'a'>
+            <Text
                 key={index}
                 className={classes.link}
                 component="a"
                 href={link.link}
-                onClick={(event) => event.preventDefault()}
+                // onClick={(event) => event.preventDefault()}
             >
                 {link.label}
             </Text>
