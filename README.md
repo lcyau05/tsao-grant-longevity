@@ -1,3 +1,9 @@
+## Problem Statement
+
+Non-profit organisations often struggle to discover and track relevant grant opportunities due to fragmented information, manual search processes, and varying eligibility requirements across grant portals.
+
+**How might non-profit organisations proactively “pull” relevant grant information from the OurSG Grants portal based on key criteria such as issue area, grant scope, KPIs, funding quantum, and application deadlines, so that they can make better-informed funding decisions and strengthen their long-term financial sustainability?**
+
 # FindGrant
 
 A comprehensive grant discovery and recommendation platform that helps users find relevant funding opportunities through intelligent matching and personalized recommendations.
