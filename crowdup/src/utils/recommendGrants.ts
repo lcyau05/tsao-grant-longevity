@@ -130,7 +130,7 @@
 // }
 
 import { IGrant, GrantPreference, GrantRecommendation } from "../types";
-const MIN_RECOMMENDATION_SCORE = 0;
+const MIN_RECOMMENDATION_SCORE = 20;
 export function recommendGrants(
     grants: IGrant[],
     pref: GrantPreference
@@ -215,7 +215,7 @@ function scoreGrant(
     );
 
     if (outcomeMatches.length > 0) {
-        score += outcomeMatches.length * 25;
+        score += Math.min(outcomeMatches.length, 2) * 25;
         reasons.push(
             `Supports your outcomes: ${outcomeMatches
                 .map(humanize)
@@ -228,12 +228,16 @@ function scoreGrant(
     /* 2️⃣ FUNDING ADEQUACY */
     if (pref.minFunding && grant.fundingCap) {
         if (grant.fundingCap >= pref.minFunding) {
-            score += 20;
-            reasons.push("Funding amount meets your minimum needs");
+            score += 15; // not 20
         } else {
-            score -= 15;
-            reasons.push("Funding amount may be insufficient");
+            score -= 10;
         }
+    }
+
+    /* ⭐ STRONG FIT BOOST */
+    if (hasCoreMatch && outcomeMatches.length > 0) {
+        score += 30;
+        reasons.push("Strong mission + outcome alignment");
     }
 
     /* 3️⃣ URGENCY & TIMING REALISM */
@@ -286,7 +290,7 @@ function scoreGrant(
 
     // HARD REQUIREMENT ONLY IF USER SELECTED ISSUE AREAS
     if (pref.issueAreas.length > 0 && !hasCoreMatch) {
-        score -= 20;
+        score *= 0.4; // down-rank hard, but don't kill
         reasons.push("Limited alignment with selected focus areas");
     }
 
