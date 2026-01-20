@@ -197,10 +197,11 @@ Returns a JSON array of parsed grant objects.
 
 ```bash
 cd crowdup
-yarn dev          # Start dev server
-yarn build        # Build for production
-yarn lint         # Run ESLint
-yarn preview      # Preview production build
+node index.js       # Start dev server
+# yarn dev          # Start dev server
+# yarn build        # Build for production
+# yarn lint         # Run ESLint
+# yarn preview      # Preview production build
 ```
 
 ### Backend Development
@@ -226,9 +227,6 @@ node index.js     # Run scraper server
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License.
 
 ## Authors
 
