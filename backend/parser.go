@@ -284,7 +284,7 @@ func ParseGrant(raw RawGrant) *ParsedGrant {
 		FundingCap: extractFundingCap(raw.RawText),
 		Categories: extractCategories(raw.RawText),
 		KPIs:       inferKPIs(raw.RawText),
-		adminLoad:  inferAdminLoad(adminText),
+		AdminLoad:  inferAdminLoad(adminText),
 		Info: GrantInfo{
 			About:       sections["about"],
 			WhoCanApply: sections["whoCanApply"],
